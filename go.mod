@@ -1,4 +1,4 @@
-module golang_task
+module golang.task
 
 go 1.22.3
 
