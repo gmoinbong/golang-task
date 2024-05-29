@@ -9,7 +9,9 @@ import (
 func (app *application) routes() http.Handler {
 	router := httprouter.New()
 
-	router.POST("/calculate", app.recoverPanic(app.validateJSON(app.calculateHandler)))
+	router.POST("/calculate", app.validateJSON(app.calculateHandler))
 
-	return router
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		router.ServeHTTP(w, r)
+	})
 }
